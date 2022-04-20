@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import NestedCheckbox, { CheckboxOption } from "./NestedCheckbox";
+import React, { useState } from "react";
 
-function App() {
+const defaultNestedCheckboxesState = {
+  foo: true,
+  bar: false,
+  group1: {
+    level2: true,
+    level2option2: false,
+    nested: {
+      option: true,
+    },
+  },
+};
+
+const App = () => {
+  const [checkboxes, setCheckboxes] = useState<CheckboxOption>(
+    defaultNestedCheckboxesState
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "2em" }}>
+      <NestedCheckbox checkboxes={checkboxes} onChange={setCheckboxes} />
     </div>
   );
-}
+};
 
 export default App;
